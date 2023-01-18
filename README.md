@@ -1,1 +1,1 @@
-## 0x1B. C - Sorting algorithms & Big O
+## This repository contains sorting algorithms in C Holberton School x ALX projects.
