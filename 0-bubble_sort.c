@@ -23,8 +23,7 @@ void swap_ints(int *a, int *b)
  */
 void bubble_sort(int *array, size_t size)
 {
-	size_t i;
-    length = size;
+	size_t i, length = size;
 	bool bubbly = false;
 
 	if (array == NULL || size < 2)
