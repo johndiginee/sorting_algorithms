@@ -1,49 +1,47 @@
 #include "sort.h"
 
 /**
- * get_max_gap - gets the a largest Knuth Sequence gap for this size
- * @size: the size of the array
- *
- * Return: the gap size
+ * swap_ints - Swap two integers in an array.
+ * @a: The first integer to swap.
+ * @b: The second integer to swap.
  */
-size_t get_max_gap(size_t size)
+void swap_ints(int *a, int *b)
 {
-	size_t num;
+	int tmp;
 
-	num = 1;
-	while (num < size)
-		num = num * 3 + 1;
-	return ((num - 1) / 3);
+	tmp = *a;
+	*a = *b;
+	*b = tmp;
 }
 
 /**
  * shell_sort - Sort an array of integers in ascending
- * @array: An integer array to sort
- * @size: The size of the array
+ * @array: An array of integers.
+ * @size: The size of the array.
  *
- * Return: void
+ * Description: Uses the Knuth interval sequence.
  */
 void shell_sort(int *array, size_t size)
 {
 	size_t gap, i, j;
-	int temporary;
 
-	if (!array || !size)
+	if (array == NULL || size < 2)
 		return;
 
+	for (gap = 1; gap < (size / 3);)
+		gap = gap * 3 + 1;
 
-	for (gap = get_max_gap(size); gap; gap = (gap - 1) / 3)
+	for (; gap >= 1; gap /= 3)
 	{
 		for (i = gap; i < size; i++)
 		{
-			temporary = array[i];
-			for (j = i; j > gap - 1 && array[j - gap] > temporary; j -= gap)
+			j = i;
+			while (j >= gap && array[j - gap] > array[j])
 			{
-				array[j] = array[j - gap];
+				swap_ints(array + j, array + (j - gap));
+				j -= gap;
 			}
-			array[j] = temporary;
 		}
 		print_array(array, size);
 	}
 }
-
